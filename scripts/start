@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mix ecto.create
+mkdir -p ~/storage/dev
+iex -S mix phx.server

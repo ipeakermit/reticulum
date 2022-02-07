@@ -1,0 +1,2 @@
+sudo rm -rf ./tmp
+docker build -t ret . --network=host

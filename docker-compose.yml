@@ -1,20 +1,37 @@
-version: '3'
+version: '3.5'
 services:
     db:
+        container_name: db
         image: postgres:10
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
         volumes:
             - ./tmp/db:/var/lib/postgresql/data
+        networks:
+            - vxlab
     ret:
-        build: .
+        container_name: ret
+        #network_mode: host
+        image: ret
+        #build:
+        #  context: .
+        #  dockerfile: TurkeyDockerfile
         environment:
-            - "DB_HOST=$DB_HOST"
-        command: bash -c "source ~/.bashrc; pushd assets; yarn; popd; mix deps.get; mix ecto.create; mix ecto.migrate; mix phx.server"
+            - "DB_HOST=db"
+        #command: bash -c "source ~/.bashrc; pushd assets; yarn; popd; mix deps.get; mix ecto.create; mix ecto.migrate; mix phx.server"
+        command: sleep 10000
         volumes:
             - .:/ret
         ports:
             - "4000:4000"
         depends_on:
             - db
+        networks:
+            - vxlab
+
+networks:
+    vxlab:
+      external: true
+      name: vxlab
+

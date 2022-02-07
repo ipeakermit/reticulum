@@ -34,8 +34,8 @@ defmodule Ret.Mixfile do
   defp deps do
     [
       {:ecto_boot_migration, "~> 0.2.0"},
-      {:phoenix, "~> 1.4.0"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix, "~> 1.5.0"},
+      {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:plug, "~> 1.7"},
       # Avoid 3.4.0 for now bc https://github.com/elixir-ecto/ecto/issues/3246
@@ -44,13 +44,13 @@ defmodule Ret.Mixfile do
       {:absinthe, "~> 1.4"},
       {:dataloader, "~> 1.0.0"},
       {:absinthe_plug, "~> 1.4"},
-      {:absinthe_phoenix, "~> 1.4.0"},
+      {:absinthe_phoenix, "~> 2.0.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.13"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.17"},
-      {:cowboy, "~> 2.6.3"},
-      {:plug_cowboy, "~> 2.0"},
+      {:cowboy, "~> 2.7"},
+      {:plug_cowboy, "~> 2.1"},
       {:distillery, "~> 2.0"},
       {:peerage, "~> 1.0"},
       {:httpoison, "~> 1.5"},
@@ -91,7 +91,8 @@ defmodule Ret.Mixfile do
       {:ex_rated, "~> 1.3.3"},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:ex_json_schema, "~> 0.7.3"},
-      {:observer_cli, "~> 1.5"}
+      {:observer_cli, "~> 1.5"},
+      {:ex2ms, "~> 1.6.1"}
     ]
   end
 
