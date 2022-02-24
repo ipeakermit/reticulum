@@ -2,6 +2,7 @@ defmodule Ret.LoginToken do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query
+  import Logger
 
   alias Ret.{Repo, Account}
 
@@ -19,6 +20,7 @@ defmodule Ret.LoginToken do
 
   @doc false
   def changeset_for_email(login_token, email) do
+    Logger.info("changeset_for_email")
     token = generate_token(email)
 
     login_token
@@ -36,6 +38,7 @@ defmodule Ret.LoginToken do
   end
 
   def lookup_by_token(token) do
+    Logger.info("lookup_by_token")
     login_token =
       Ret.LoginToken
       |> where([t], t.token == ^token)
@@ -72,6 +75,7 @@ defmodule Ret.LoginToken do
   defp generate_token(nil), do: nil
 
   defp generate_token(_email) do
+    Logger.info("generate_token(_email)")
     SecureRandom.hex()
   end
 end

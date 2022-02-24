@@ -1,0 +1,40 @@
+FROM elixir:1.8
+#FROM ubuntu:20.04
+
+COPY 02proxy /etc/apt/apt.conf.d/
+
+RUN apt update && apt -y dist-upgrade
+
+# Set the locale
+RUN apt -y install locales
+
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8
+
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install keyboard-configuration
+
+# install phoenix
+RUN mix local.hex --force
+#RUN mix archive.install hex phx_new --force
+RUN mix archive.install hex phx_new 1.4.17 --force
+#RUN mix archive.install hex phx_new 1.5.13 --force
+#RUN mix archive.install hex phx_new 1.6.6 --force
+
+WORKDIR /root
+COPY . .
+RUN mix local.rebar
+
+
+RUN mix deps.get
+#RUN mix ecto.create
+RUN mkdir -p storage/dev
+
+#COPY mycerts/key.pem /certs/key.pem
+#COPY mycerts/cert.pem /certs/cert.pem
+
+RUN apt install -y less vim
+RUN mix compile.phoenix

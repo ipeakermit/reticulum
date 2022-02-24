@@ -17,7 +17,7 @@ ENV LC_ALL en_US.UTF-8
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install keyboard-configuration
 
-# Erlang
+# Elixir
 RUN apt update && apt -y install wget gnupg
 #RUN wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && dpkg -i erlang-solutions_2.0_all.deb
 #RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_amd64.deb
@@ -26,31 +26,20 @@ RUN wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.
 #RUN wget https://github.com/erlang/otp/releases/download/OTP-22.3.4.9/otp_src_22.3.4.9.tar.gz
 #RUN dpkg -i esl-erlang_22.3.4.9-1~ubuntu~xenial_amd64.deb || apt -f -y install
 RUN apt update && apt -y install erlang-src erlang-dev erlang-parsetools
-# https://github.com/elixir-lang/elixir/archive/refs/tags/v1.8.2.tar.gz
-
-# install asdf
-RUN apt update && apt install -y git less vim telnet lsof curl
-RUN apt update && apt install -y build-essential git wget libssl-dev libreadline-dev libncurses5-dev zlib1g-dev m4 curl wx-common libwxgtk3.0-dev autoconf
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4
-RUN echo '. $HOME/.asdf/asdf.sh' >> ~/.bashrc
-RUN echo '. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
-SHELL ["/bin/bash", "-c"]
-RUN /root/.asdf/bin/asdf plugin-add erlang
-RUN /root/.asdf/bin/asdf plugin-add elixir
-RUN /root/.asdf/bin/asdf install erlang 22.0.7
-RUN /root/.asdf/bin/asdf install elixir 1.8.2-otp-22
-
-# install phoenix
+RUN apt update && apt -y install elixir
 RUN mix local.hex --force
 #RUN mix archive.install hex phx_new --force
 RUN mix archive.install hex phx_new 1.4.17 --force
 ##RUN mix archive.install hex phx_new 1.5.13 --force
 #RUN mix archive.install hex phx_new 1.6.6 --force
 
+RUN apt update && apt -y install git
+
 WORKDIR /root
 COPY . .
 RUN mix local.rebar
 
+RUN apt update && apt -y install vim telnet lsof
 
 RUN mix deps.get
 #RUN mix ecto.create

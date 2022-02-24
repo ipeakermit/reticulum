@@ -1,2 +1,9 @@
 sudo rm -rf ./tmp
-docker build -t ret . --network=host
+
+mkdir -p certs
+sudo cp /etc/letsencrypt/live/codi13.dyndns.org/fullchain.pem priv/dev-ssl.cert
+sudo cp /etc/letsencrypt/live/codi13.dyndns.org/privkey.pem priv/dev-ssl.key
+sudo chown -R $USER certs
+
+#docker build -t ret . --network=host
+docker build -f Dockerfile.elixir -t ret .

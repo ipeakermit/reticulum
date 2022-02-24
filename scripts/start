@@ -2,4 +2,8 @@
 
 mix ecto.create
 mkdir -p ~/storage/dev
-iex -S mix phx.server
+#iex -S mix phx.server
+# last known good
+##mix phx.server
+elixir --name ret --cookie mycookie -S mix phx.server
+sleep 10000
