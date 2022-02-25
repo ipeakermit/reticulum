@@ -16,6 +16,7 @@ ENV LC_ALL en_US.UTF-8
 
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install keyboard-configuration
+RUN apt install -y less vim lsof
 
 # install phoenix
 RUN mix local.hex --force
@@ -36,5 +37,4 @@ RUN mkdir -p storage/dev
 #COPY mycerts/key.pem /certs/key.pem
 #COPY mycerts/cert.pem /certs/cert.pem
 
-RUN apt install -y less vim
 RUN mix compile.phoenix

@@ -28,7 +28,8 @@ config :ret, RetWeb.Endpoint,
     otp_app: :ret,
     cipher_suite: :strong,
     keyfile: "#{File.cwd!()}/priv/dev-ssl.key",
-    certfile: "#{File.cwd!()}/priv/dev-ssl.cert"
+    certfile: "#{File.cwd!()}/priv/dev-ssl.cert",
+    cacertfile: "#{File.cwd!()}/priv/dev-ssl.cacert"
   ],
   cors_proxy_url: [scheme: "https", host: cors_proxy_host, port: 4000],
   assets_url: [scheme: "https", host: assets_host, port: 4000],
@@ -174,7 +175,22 @@ config :ret, Ret.Mailer, adapter: Bamboo.LocalAdapter
 
 config :ret, RetWeb.Email, from: "info@hubs-mail.com"
 
-config :ret, Ret.PermsToken, perms_key: (System.get_env("PERMS_KEY") || "") |> String.replace("\\n", "\n")
+#config :ret, Ret.PermsToken, perms_key: (System.get_env("PERMS_KEY") || "") |> String.replace("\\n", "\n")
+config :ret, Ret.PermsToken, perms_key: "-----BEGIN RSA PRIVATE KEY-----\n
+MIICWwIBAAKBgQDTMq7vcduhLtDMMs5Y8cQKAn/tZuNqVWjnpMcgkdnvY5mSs5tZ\n
+PHxYz1PLRKiz2XSR4R5WVdL3cCCqeEOh0eSa8NjRy9ULJICbBKLUPl9SmXgrK8JM\n
+msLt9q9+Mvf8RQCHqr4GgBw230xTAY89k15RsDK2PU4forlqP/qZHmts6wIDAQAB\n
+AoGAVxcSXjj0WY4lmd7linX/4iTPvgTsiH+557PiTUL3vKi0vnMD/5Nar4CnTC3+\n
+51Mnp7ROP0na2iBJyCIZuZQFEUNRTu2viJeCmRZK50aZO0UNeiMXFhjV0EN7Ocvi\n
+uZimuojP6dmS9fMhJDR7cHtv1hEJrzLYHDoTiCEZu13md4ECQQD30WRdInYiIZwX\n
+8vz1xCc8IwcL/qjZ33T3UBpZwiTKVQf8DUUHW+EF5HPc4b0nNEtYOyUj+aaQN0ma\n
+Z5L9geDBAkEA2ivFnSqUaX08i6rfMrNOnouM8ZeUj1tKwiowTAO+1kvet4sOvGg+\n
+YACsOyQSaFplqy/q7uE8mzE89GhTdTFMqwJAFZV7NFFoEJj0y3EybwVilW5Hktff\n
+RPqdaVzkrqSmJ6k4RM+zD20FMEoxfS98FgoL9edQ2M1JoI3wLy6OMt45AQJATnQ1\n
+INph+jk134e3sZS3Ld5C9dGrc43BqWbgbUVfh9JKqbgQuYHHBGDZjn7fO7VeIBwg\n
+IHzQfYJMSBuH/3mV9wJAFkfnquQbCDdw/7zVmqQHRNUb6UDBnVZfHowiMrChGI90\n
+JVSzDV0KSPGOGquuti316DeCtnhM5LTUAEjhcpwbdw==\n
+-----END RSA PRIVATE KEY-----"
 
 config :ret, Ret.OAuthToken, oauth_token_key: ""
 

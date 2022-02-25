@@ -1,9 +1,15 @@
+#!/bin/bash
 sudo rm -rf ./tmp
 
 mkdir -p certs
-sudo cp /etc/letsencrypt/live/codi13.dyndns.org/fullchain.pem priv/dev-ssl.cert
+###sudo cp /etc/letsencrypt/live/codi13.dyndns.org/fullchain.pem priv/dev-ssl.cert
+sudo cp /etc/letsencrypt/live/codi13.dyndns.org/fullchain.pem priv/dev-ssl.cacert
 sudo cp /etc/letsencrypt/live/codi13.dyndns.org/privkey.pem priv/dev-ssl.key
-sudo chown -R $USER certs
+sudo cp /etc/letsencrypt/live/codi13.dyndns.org/cert.pem priv/dev-ssl.cert
+cp priv/dev-ssl.cert certs/cert.pem
+cp priv/dev-ssl.key certs/key.pem
+cp priv/dev-ssl.cacert certs/cacert.pem
+#sudo chown -R $USER certs
 
 #docker build -t ret . --network=host
 docker build -f Dockerfile.elixir -t ret .

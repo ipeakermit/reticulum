@@ -1,0 +1,4 @@
+HOST_IP setting for CORS: https://github.com/mozilla/hubs/issues/4194#issuecomment-828881267
+letsencrypt certbot upgrade X1 cert: https://community.letsencrypt.org/t/cant-verify-certificates-issued-by-letsencrypt/160602/48, https://letsencrypt.org/docs/dst-root-ca-x3-expiration-september-2021/
+letsencrypt cert not accepted by wget/etc. due to improperly advised chain?: https://community.letsencrypt.org/t/wget-problem-on-valid-certificate/152269/2
+https://superuser.com/questions/97201/how-to-save-a-remote-server-ssl-certificate-locally-as-a-file

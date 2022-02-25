@@ -24,7 +24,8 @@ defmodule Ret.Crypto do
     iv = :crypto.strong_rand_bytes(16)
     aab = << >>
     hashed_key = :crypto.hash(:sha256, key)
-    {ciphertext, tag} = :crypto.crypto_one_time_aead(:aes_gcm, hashed_key, iv, plaintext |> to_string(), aab, true)
+    {ciphertext, tag} = :crypto.block_encrypt(:aes_gcm, hashed_key, iv, {"AES256GCM", plaintext |> to_string(), 16}) 
+    #{ciphertext, tag} = :crypto.crypto_one_time_aead(:aes_gcm, hashed_key, iv, plaintext |> to_string(), aab, true)
     # 
     iv <> tag <> ciphertext
   end
